@@ -7,16 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.relationshipsrestapi.exception.ApiRequestException;
 import com.example.relationshipsrestapi.model.Car;
+import com.example.relationshipsrestapi.model.Customer;
 import com.example.relationshipsrestapi.service.CarManager;
+import com.example.relationshipsrestapi.service.CustomerManager;
 
 @RestController
 public class CarController {
 	
 	private CarManager carManager;
+	private CustomerManager customerManager;
 	
 	@Autowired
-	public CarController(CarManager carManager) {
+	public CarController(CarManager carManager, CustomerManager customerManager) {
 	this.carManager = carManager;
+	this.customerManager = customerManager;
 	}
 
 	
@@ -38,6 +42,20 @@ public class CarController {
 		return carManager.save(car);
 	}
 
+	
+	@PutMapping("/cars{carId}/customers/{customerId}")
+	public Car assignCarToCustomer(@PathVariable Long carId, @PathVariable Long customerId) {
+		
+		Car car = carManager.findById(carId).get();
+		Customer customer = customerManager.findById(customerId).get();
+		
+		car.assignCustomer(customer);
+		
+		return carManager.save(car);
+
+	}
+	
+	
 	
 	@DeleteMapping("/cars/{id}")
 	public void deleteCar(@PathVariable Long id) {

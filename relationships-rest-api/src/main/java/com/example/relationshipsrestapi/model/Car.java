@@ -22,7 +22,7 @@ public class Car {
 	private String numberPlate;
 	
 	@ManyToOne
-	@JoinColumn(name = "customer_id", nullable = false)
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
 	
@@ -68,6 +68,11 @@ public class Car {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+
+	public void assignCustomer(Customer customer) {
+		this.customer= customer;	
 	}
 	
 }
