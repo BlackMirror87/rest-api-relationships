@@ -43,17 +43,17 @@ public class CarController {
 	}
 
 	
-	@PutMapping("/cars{carId}/customers/{customerId}")
-	public Car assignCarToCustomer(@PathVariable Long carId, @PathVariable Long customerId) {
-		
-		Car car = carManager.findById(carId).get();
-		Customer customer = customerManager.findById(customerId).get();
-		
-		car.assignCustomer(customer);
-		
-		return carManager.save(car);
-
-	}
+//	@PutMapping("/cars/{carId}/customers/{customerId}")
+//	public Car assignCarToCustomer(@PathVariable Long carId, @PathVariable Long customerId) {
+//		
+//		Car car = carManager.findById(carId).get();
+//		Customer customer = customerManager.findById(customerId).get();
+//		
+//		car.assignCustomer(customer);
+//		
+//		
+//		return carManager.save(car);
+//	}
 	
 	
 	

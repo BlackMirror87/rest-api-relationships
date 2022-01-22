@@ -2,6 +2,7 @@ package com.example.relationshipsrestapi.model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -77,5 +78,9 @@ public class Customer {
 		this.cars = cars;
 	}
 
+
+	public void assignCars(Set<Car> cars) {
+		this.cars =  cars;
+	}
 	
 }

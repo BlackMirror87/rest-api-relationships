@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Car {
@@ -20,6 +23,7 @@ public class Car {
 	
 	@Column(name = "number_plate", columnDefinition = "TEXT", nullable = false, unique = true)
 	private String numberPlate;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
@@ -71,8 +75,8 @@ public class Car {
 	}
 
 
-	public void assignCustomer(Customer customer) {
-		this.customer= customer;	
-	}
+//	public void assignCustomer(Customer customer) {
+//		this.customer= customer;	
+//	}
 	
 }
