@@ -31,7 +31,7 @@ public class Customer {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
-	private Set<Car> cars;
+	private Set<Car> cars = new HashSet<Car>();
 	
 	
 	public Customer() {

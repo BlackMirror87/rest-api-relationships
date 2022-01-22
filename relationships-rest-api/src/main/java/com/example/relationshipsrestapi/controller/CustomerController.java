@@ -44,20 +44,20 @@ public class CustomerController {
 	}
 	
 
-	@PutMapping("/customers/{customerId}/cars/{carId}")
-	public Customer addCarToCustomer(@PathVariable Long customerId, @PathVariable Long carId) {
-
-		Customer customer = customerManager.findById(customerId).get();
-		Car car = carManager.findById(carId).get();
-
-		HashSet<Car> cars = new HashSet<>();
-		cars.add(car);
-
-		customer.assignCars(cars);
-
-		return customerManager.save(customer);
-
-	}
+//	@PutMapping("/cars/{carId}/customers/{customerId}")
+//	public Customer addCarToCustomer(@PathVariable Long customerId, @PathVariable Long carId) {
+//
+//		Customer customer = customerManager.findById(customerId).get();
+//		Car car = carManager.findById(carId).get();
+//
+//		HashSet<Car> cars = new HashSet<>();
+//		cars.add(car);
+//
+//		customer.assignCars(cars);
+//
+//		return customerManager.save(customer);
+//
+//	}
 
 	@DeleteMapping("/customers/{id}")
 	public void deleteCustomer(@PathVariable Long id) {

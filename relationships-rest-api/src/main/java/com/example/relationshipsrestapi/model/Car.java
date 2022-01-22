@@ -75,8 +75,8 @@ public class Car {
 	}
 
 
-//	public void assignCustomer(Customer customer) {
-//		this.customer= customer;	
-//	}
+	public void assignCustomer(Customer customer) {
+		this.customer= customer;	
+	}
 	
 }

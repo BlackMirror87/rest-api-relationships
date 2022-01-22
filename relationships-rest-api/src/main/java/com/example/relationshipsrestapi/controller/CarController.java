@@ -1,5 +1,6 @@
 package com.example.relationshipsrestapi.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +44,20 @@ public class CarController {
 	}
 
 	
-//	@PutMapping("/cars/{carId}/customers/{customerId}")
-//	public Car assignCarToCustomer(@PathVariable Long carId, @PathVariable Long customerId) {
-//		
-//		Car car = carManager.findById(carId).get();
-//		Customer customer = customerManager.findById(customerId).get();
-//		
-//		car.assignCustomer(customer);
-//		
-//		
-//		return carManager.save(car);
-//	}
+	@PutMapping("/cars/{carId}/customers/{customerId}")
+	public Car assignCarToCustomer(@PathVariable Long carId, @PathVariable Long customerId) {
+		
+		Car car = carManager.findById(carId).get();
+		Customer customer = customerManager.findById(customerId).get();
+		
+		//car.assignCustomer(customer);
+		HashSet<Car> cars = new HashSet<>();
+		cars.add(car);
+		customer.assignCars(cars);
+		
+		
+		return carManager.save(car);
+	}
 	
 	
 	
