@@ -44,8 +44,8 @@ public class CustomerController {
 	}
 	
 
-//	@PutMapping("/cars/{carId}/customers/{customerId}")
-//	public Customer addCarToCustomer(@PathVariable Long customerId, @PathVariable Long carId) {
+//	@PutMapping("/customers/{customerId}/cars/{carId}")
+//	public Customer assignCarToCustomer(@PathVariable Long customerId, @PathVariable Long carId) {
 //
 //		Customer customer = customerManager.findById(customerId).get();
 //		Car car = carManager.findById(carId).get();
@@ -56,7 +56,7 @@ public class CustomerController {
 //		customer.assignCars(cars);
 //
 //		return customerManager.save(customer);
-//
+
 //	}
 
 	@DeleteMapping("/customers/{id}")

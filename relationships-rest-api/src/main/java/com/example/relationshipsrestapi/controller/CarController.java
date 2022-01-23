@@ -44,17 +44,16 @@ public class CarController {
 	}
 
 	
-	@PutMapping("/cars/{carId}/customers/{customerId}")
+	@PutMapping("customers/{customerId}/cars/{carId}")
 	public Car assignCarToCustomer(@PathVariable Long carId, @PathVariable Long customerId) {
 		
 		Car car = carManager.findById(carId).get();
 		Customer customer = customerManager.findById(customerId).get();
 		
-		//car.assignCustomer(customer);
-		HashSet<Car> cars = new HashSet<>();
-		cars.add(car);
-		customer.assignCars(cars);
-		
+		car.assignCustomer(customer);
+		//HashSet<Car> cars = new HashSet<>();
+		//cars.add(car);
+		//customer.assignCars(cars);
 		
 		return carManager.save(car);
 	}
