@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.relationshipsrestapi.exception.ApiRequestException;
+import com.example.relationshipsrestapi.model.Adress;
 import com.example.relationshipsrestapi.model.Car;
 import com.example.relationshipsrestapi.model.Customer;
+import com.example.relationshipsrestapi.service.AdressManager;
 import com.example.relationshipsrestapi.service.CarManager;
 import com.example.relationshipsrestapi.service.CustomerManager;
 
@@ -19,45 +21,46 @@ public class CustomerController {
 
 	private CustomerManager customerManager;
 	private CarManager carManager;
+	private AdressManager adressManager;
 
 	@Autowired
-	public CustomerController(CustomerManager customerManager, CarManager carManager) {
+	public CustomerController(CustomerManager customerManager, CarManager carManager,
+			AdressManager adressManager) {
 		this.customerManager = customerManager;
 		this.carManager = carManager;
+		this.adressManager = adressManager;
 	}
 
+	
 	@GetMapping("/customers")
 	public List<Customer> getCustomers() {
 		return customerManager.findAll();
 	}
 
+	
 	@GetMapping("/customers/{id}")
 	public Customer getCustomerById(@PathVariable Long id) {
 		return customerManager.findById(id)
 				.orElseThrow(() -> new ApiRequestException("Customer not found with id " + id));
-
 	}
 
+	
 	@PostMapping("/customers")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		return customerManager.save(customer);
 	}
 	
-
-//	@PutMapping("/customers/{customerId}/cars/{carId}")
-//	public Customer assignCarToCustomer(@PathVariable Long customerId, @PathVariable Long carId) {
-//
-//		Customer customer = customerManager.findById(customerId).get();
-//		Car car = carManager.findById(carId).get();
-//
-//		HashSet<Car> cars = new HashSet<>();
-//		cars.add(car);
-//
-//		customer.assignCars(cars);
-//
-//		return customerManager.save(customer);
-
-//	}
+	
+	@PutMapping("/customers/{customerId}/adress/{adressId}")
+	public Customer assignAdressToCustomer(@PathVariable Long customerId, @PathVariable Long adressId) {
+		
+		Customer customer = customerManager.findById(customerId).get();
+		Adress adress = adressManager.findById(adressId).get();
+		
+		customer.setAdress(adress);
+		return customerManager.save(customer);
+	}
+	
 
 	@DeleteMapping("/customers/{id}")
 	public void deleteCustomer(@PathVariable Long id) {

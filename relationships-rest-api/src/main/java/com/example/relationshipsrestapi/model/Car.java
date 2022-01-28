@@ -1,14 +1,9 @@
 package com.example.relationshipsrestapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -24,11 +19,17 @@ public class Car {
 	@Column(name = "number_plate", columnDefinition = "TEXT", nullable = false, unique = true)
 	private String numberPlate;
 	
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name = "customer_id")
+//	private Customer customer;
 	
-	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "car_part", joinColumns = @JoinColumn(name = "car_id"),
+	inverseJoinColumns = @JoinColumn(name = "part_id"))
+	private Set<Part> parts = new HashSet<>();
 	
+
 	
 	public Car() {
 	}
@@ -65,18 +66,29 @@ public class Car {
 	}
 
 
-	public Customer getCustomer() {
-		return customer;
+	public Set<Part> getParts() {
+		return parts;
 	}
 
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setParts(Set<Part> parts) {
+		this.parts = parts;
 	}
 
 
-	public void assignCustomer(Customer customer) {
-		this.customer= customer;	
+	public void addPart(Part part) {
+		this.parts.add(part);
 	}
+	
+
+//	public Customer getCustomer() {
+//		return customer;
+//	}
+//
+//
+//	public void setCustomer(Customer customer) {
+//		this.customer = customer;
+//	}
+
 	
 }

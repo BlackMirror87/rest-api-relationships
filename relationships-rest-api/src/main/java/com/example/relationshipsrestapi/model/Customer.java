@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,9 +33,16 @@ public class Customer {
 	@Column(name = "last_name", columnDefinition = "TEXT", nullable = false)
 	private String lastName;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "customer")
-	private Set<Car> cars = new HashSet<Car>();
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "adress_id", referencedColumnName = "id")
+	private Adress adress;
+		
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "customer")
+//	private Set<Car> cars = new HashSet<Car>();
+	
+
+	
 	
 	
 	public Customer() {
@@ -69,18 +80,32 @@ public class Customer {
 	}
 
 
-	public Set<Car> getCars() {
-		return cars;
+//	public Set<Car> getCars() {
+//		return cars;
+//	}
+//
+//
+//	public void setCars(Set<Car> cars) {
+//		this.cars = cars;
+//	}
+
+//
+//	public void assignCars(Set<Car> cars) {
+//		this.cars =  cars;
+//	}
+
+
+
+
+
+	public Adress getAdress() {
+		return adress;
 	}
 
 
-	public void setCars(Set<Car> cars) {
-		this.cars = cars;
+	public void setAdress(Adress adress) {
+		this.adress = adress;
 	}
-
-
-	public void assignCars(Set<Car> cars) {
-		this.cars =  cars;
-	}
+//	
 	
 }
