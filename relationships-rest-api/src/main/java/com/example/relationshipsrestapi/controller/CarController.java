@@ -40,7 +40,12 @@ public class CarController {
 
 	@PostMapping("/cars")
 	public Car addCar(@RequestBody Car car) {
-		return carManager.save(car);
+		Car car1= new Car();
+		car1.setBrand(car.getBrand());
+		car1.setNumberPlate(car.getNumberPlate());
+		car1.setParts(car.getParts());
+		
+		return carManager.save(car1);
 	}
 
 	// version 1 - works
@@ -51,7 +56,7 @@ public class CarController {
 		return carManager.save(car);
 	}
 
-	// version 2 with utility methods - LazyInitializationException
+	// version 2 with utility methods gets LazyInitializationException
 //	@PostMapping("/customers/{customerId}/cars")
 //	public Car addCar(@PathVariable Long customerId, @RequestBody Car car) {
 //		Customer customer = customerManager.findById(customerId).get();

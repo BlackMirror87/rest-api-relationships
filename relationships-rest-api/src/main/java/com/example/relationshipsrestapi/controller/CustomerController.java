@@ -45,6 +45,18 @@ public class CustomerController {
 	public Customer addCustomer(@RequestBody Customer customer) {
 		return customerManager.save(customer);
 	}
+	
+//	@PostMapping("/customers")
+//	public Customer addCustomer(@RequestBody Customer customer) {
+//		Customer customer1 = new Customer();
+//		customer1.setFirstname(customer.getFirstName());
+//		customer1.setLastName(customer.getLastName());
+//		customer1.setCars(customer.getCars());
+//		customer1.setAdress(customer.getAdress());
+//		
+//		
+//		return customerManager.save(customer1);
+//	}
 
 	@PutMapping("/customers/{id}")
 	public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
