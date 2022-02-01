@@ -19,21 +19,22 @@ public class Car {
 	@Column(name = "number_plate", columnDefinition = "TEXT", nullable = false, unique = true)
 	private String numberPlate;
 	
-//	@ManyToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name = "customer_id")
-//	private Customer customer;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinTable(name = "customer_car", joinColumns = @JoinColumn(name = "car_id"),
+	           inverseJoinColumns = @JoinColumn(name = "customer_id"))
+	private Customer customer;
 	
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "car_part", joinColumns = @JoinColumn(name = "car_id"),
-	inverseJoinColumns = @JoinColumn(name = "part_id"))
+	           inverseJoinColumns = @JoinColumn(name = "part_id"))
 	private Set<Part> parts = new HashSet<>();
 	
 
 	
 	public Car() {
 	}
-
 	
 	public Car(String brand, String numberPlate) {
 	
@@ -65,30 +66,24 @@ public class Car {
 		this.numberPlate = numberPlate;
 	}
 
-
 	public Set<Part> getParts() {
 		return parts;
 	}
 
-
 	public void setParts(Set<Part> parts) {
 		this.parts = parts;
 	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
 
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	public void addPart(Part part) {
 		this.parts.add(part);
 	}
-	
-
-//	public Customer getCustomer() {
-//		return customer;
-//	}
-//
-//
-//	public void setCustomer(Customer customer) {
-//		this.customer = customer;
-//	}
-
 	
 }

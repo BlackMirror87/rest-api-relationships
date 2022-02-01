@@ -24,46 +24,46 @@ public class CustomerController {
 	private AdressManager adressManager;
 
 	@Autowired
-	public CustomerController(CustomerManager customerManager, CarManager carManager,
-			AdressManager adressManager) {
+	public CustomerController(CustomerManager customerManager, CarManager carManager, AdressManager adressManager) {
 		this.customerManager = customerManager;
 		this.carManager = carManager;
 		this.adressManager = adressManager;
 	}
 
-	
 	@GetMapping("/customers")
 	public List<Customer> getCustomers() {
 		return customerManager.findAll();
 	}
 
-	
 	@GetMapping("/customers/{id}")
 	public Customer getCustomerById(@PathVariable Long id) {
 		return customerManager.findById(id)
 				.orElseThrow(() -> new ApiRequestException("Customer not found with id " + id));
 	}
-  
-	
+
 	@PostMapping("/customers")
 	public Customer addCustomer(@RequestBody Customer customer) {
 		return customerManager.save(customer);
 	}
-	
-	
-	@PutMapping("/customers/{customerId}/adress/{adressId}")
-	public Customer assignAdressToCustomer(@PathVariable Long customerId, @PathVariable Long adressId) {
-		
-		Customer customer = customerManager.findById(customerId).get();
-		Adress adress = adressManager.findById(adressId).get();
-		
-		customer.setAdress(adress);
-		return customerManager.save(customer);
+
+	@PutMapping("/customers/{id}")
+	public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+		Customer customer1 = customerManager.findById(id)
+				.orElseThrow(() -> new ApiRequestException("Customer not found with id " + id));
+
+		customer1.setFirstname(customer.getFirstName());
+		customer1.setLastName(customer.getLastName());
+
+		return customerManager.save(customer1);
 	}
-	
+
+	@DeleteMapping("/customers")
+	public void deleteCustomer(@RequestBody Customer customer) {
+		customerManager.delete(customer);
+	}
 
 	@DeleteMapping("/customers/{id}")
-	public void deleteCustomer(@PathVariable Long id) {
+	public void deleteCustomerById(@PathVariable Long id) {
 		Customer customer = customerManager.findById(id)
 				.orElseThrow(() -> new ApiRequestException("Customer not found with id " + id));
 		customerManager.delete(customer);

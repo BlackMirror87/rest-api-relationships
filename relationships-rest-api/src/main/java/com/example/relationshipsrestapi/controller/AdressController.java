@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.relationshipsrestapi.exception.ApiRequestException;
 import com.example.relationshipsrestapi.model.Adress;
 import com.example.relationshipsrestapi.service.AdressManager;
 
@@ -17,34 +19,39 @@ public class AdressController {
 	public AdressController(AdressManager adressManager) {
 		this.adressManager = adressManager;
 	}
-	
+
 	@GetMapping("/adress")
-	public List<Adress> getAdresses(){
+	public List<Adress> getAdresses() {
 		return adressManager.findAll();
 	}
-	
-	
+
 	@GetMapping("/adress/{id}")
-	public Optional<Adress> getAdress(@PathVariable Long id) {
-		return adressManager.findById(id);
+	public Adress getAdress(@PathVariable Long id) {
+		return adressManager.findById(id).orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
 	}
-	
-	
-	@PostMapping("/adress")
-	public Adress addAdress(@RequestBody Adress adress) {
-		return adressManager.save(adress);
+
+	@PutMapping("/adress/{id}")
+	public Adress updateAdress(@PathVariable Long id, @RequestBody Adress adress) {
+		Adress adress1 = adressManager.findById(id)
+				.orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
+
+		adress1.setCity(adress.getCity());
+		adress1.setPhone(adress.getPhone());
+		adress1.setStreet(adress.getStreet());
+
+		return adressManager.save(adress1);
 	}
-	
+
 	@DeleteMapping("/adress")
 	public void deleteAdress(@RequestBody Adress adress) {
 		adressManager.delete(adress);
 	}
-	
-	
+
 	@DeleteMapping("/adress/{id}")
 	public void deleteAdressById(@PathVariable Long id) {
-		adressManager.deleteById(id);
+		Adress adress = adressManager.findById(id)
+				.orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
+		adressManager.delete(adress);
 	}
-	
-	
+
 }

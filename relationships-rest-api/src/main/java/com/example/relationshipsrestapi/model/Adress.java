@@ -29,7 +29,7 @@ public class Adress {
 
 	public Adress() {
 	}
-
+	
 	public Adress(Long id, String phone, String street, String city) {
 		this.id = id;
 		this.phone = phone;

@@ -26,51 +26,47 @@ public class Part {
 	
 	
 		
+	public Part() {
+	}
+	
 	public Part(String partName, String price) {
 		this.partName = partName;
 		this.price = price;
 	}
 	
-	public Part() {
-	}
-	
 	public String getPartName() {
 		return partName;
 	}
+	
 	public void setPartName(String partName) {
 		this.partName = partName;
 	}
+	
 	public String getPrice() {
 		return price;
 	}
+	
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
 	
 	public Long getId() {
 		return id;
 	}
 	
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public Set<Car> getCars() {
 		return cars;
 	}
-
+	
 	public void setCars(Set<Car> cars) {
 		this.cars = cars;
 	}
-
-
+	
 	public void addCar (Car car) {
-		cars.add(car);
+		this.cars.add(car);
 	}
-
-
-	
-	
 }
