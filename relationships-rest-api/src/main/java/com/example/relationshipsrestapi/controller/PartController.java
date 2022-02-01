@@ -43,6 +43,16 @@ public class PartController {
 	public Part addPart(@RequestBody Part part) {
 		return partManager.save(part);
 	}
+	
+	@PutMapping("/parts/{id}")
+	public Part updatePart(@PathVariable Long id, @RequestBody Part part) {
+		Part part1 = partManager.findById(id)
+				.orElseThrow(() -> new ApiRequestException("Part not found with id: " + id));
+		part1.setPartName(part.getPartName());
+		part1.setPrice(part.getPrice());
+		
+		return partManager.save(part1);
+	}
 
 	@DeleteMapping("/parts")
 	public void delete(@RequestBody Part part) {
