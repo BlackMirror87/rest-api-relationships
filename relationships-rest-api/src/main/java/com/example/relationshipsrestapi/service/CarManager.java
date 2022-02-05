@@ -19,27 +19,24 @@ public class CarManager {
 		this.carRepository = carRepository;
 	}
 
-	
 	public List<Car> findAll() {
 		return carRepository.findAll();
 	}
-	
-		
+
 	public Optional<Car> findById(Long id) {
 		return carRepository.findById(id);
 	}
-	
+
 	public Car save(Car car) {
 		return carRepository.save(car);
 	}
-	
+
 	public void delete(Car car) {
 		carRepository.delete(car);
 	}
-	
+
 	public void deleteById(Long id) {
-		 carRepository.deleteById(id);
+		carRepository.deleteById(id);
 	}
-	
-	
+
 }

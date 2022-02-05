@@ -27,7 +27,8 @@ public class AdressController {
 
 	@GetMapping("/adress/{id}")
 	public Adress getAdress(@PathVariable Long id) {
-		return adressManager.findById(id).orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
+		return adressManager.findById(id)
+				.orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
 	}
 
 	@PutMapping("/adress/{id}")
@@ -42,16 +43,16 @@ public class AdressController {
 		return adressManager.save(adress1);
 	}
 
-	@DeleteMapping("/adress")
-	public void deleteAdress(@RequestBody Adress adress) {
-		adressManager.delete(adress);
-	}
-
-	@DeleteMapping("/adress/{id}")
-	public void deleteAdressById(@PathVariable Long id) {
-		Adress adress = adressManager.findById(id)
-				.orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
-		adressManager.delete(adress);
-	}
+//	@DeleteMapping("/adress")
+//	public void deleteAdress(@RequestBody Adress adress) {
+//		adressManager.delete(adress);
+//	}
+//
+//	@DeleteMapping("/adress/{id}")
+//	public void deleteAdressById(@PathVariable Long id) {
+//		Adress adress = adressManager.findById(id)
+//				.orElseThrow(() -> new ApiRequestException("adress not found with id " + id));
+//		adressManager.delete(adress);
+//	}
 
 }

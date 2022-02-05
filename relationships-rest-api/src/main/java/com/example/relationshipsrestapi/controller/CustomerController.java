@@ -1,13 +1,8 @@
 package com.example.relationshipsrestapi.controller;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.example.relationshipsrestapi.exception.ApiRequestException;
 import com.example.relationshipsrestapi.model.Adress;
 import com.example.relationshipsrestapi.model.Car;
@@ -45,18 +40,6 @@ public class CustomerController {
 	public Customer addCustomer(@RequestBody Customer customer) {
 		return customerManager.save(customer);
 	}
-	
-//	@PostMapping("/customers")
-//	public Customer addCustomer(@RequestBody Customer customer) {
-//		Customer customer1 = new Customer();
-//		customer1.setFirstname(customer.getFirstName());
-//		customer1.setLastName(customer.getLastName());
-//		customer1.setCars(customer.getCars());
-//		customer1.setAdress(customer.getAdress());
-//		
-//		
-//		return customerManager.save(customer1);
-//	}
 
 	@PutMapping("/customers/{id}")
 	public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {

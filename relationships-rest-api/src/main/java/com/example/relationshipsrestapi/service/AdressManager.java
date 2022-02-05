@@ -17,9 +17,8 @@ public class AdressManager {
 	@Autowired
 	public AdressManager(AdressRepository adressRepository) {
 		this.adressRepository = adressRepository;
-	};
-	
-	
+	}
+
 	public List<Adress> findAll() {
 		return adressRepository.findAll();
 	}
@@ -27,20 +26,17 @@ public class AdressManager {
 	public Optional<Adress> findById(Long id) {
 		return adressRepository.findById(id);
 	}
-	
+
 	public Adress save(Adress adress) {
 		return adressRepository.save(adress);
 	}
-	
+
 	public void delete(Adress adress) {
 		adressRepository.delete(adress);
 	}
-	
+
 	public void deleteById(Long id) {
 		adressRepository.deleteById(id);
 	}
-	
-	
-	
+
 }
-	

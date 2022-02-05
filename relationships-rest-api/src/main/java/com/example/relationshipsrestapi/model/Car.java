@@ -1,43 +1,37 @@
 package com.example.relationshipsrestapi.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Car {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "brand", columnDefinition = "TEXT", nullable = false)
 	private String brand;
-	
+
 	@Column(name = "number_plate", columnDefinition = "TEXT", nullable = false, unique = true)
 	private String numberPlate;
-	
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinTable(name = "customer_car", joinColumns = @JoinColumn(name = "car_id"),
-	           inverseJoinColumns = @JoinColumn(name = "customer_id"))
+	@JoinTable(name = "customer_car", joinColumns = @JoinColumn(name = "car_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
 	private Customer customer;
-	
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "car_part", joinColumns = @JoinColumn(name = "car_id"),
-	           inverseJoinColumns = @JoinColumn(name = "part_id"))
+	@JoinTable(name = "car_part", joinColumns = @JoinColumn(name = "car_id"), inverseJoinColumns = @JoinColumn(name = "part_id"))
 	private Set<Part> parts = new HashSet<>();
-	
 
-	
 	public Car() {
 	}
-	
+
 	public Car(String brand, String numberPlate) {
-	
+
 		this.brand = brand;
 		this.numberPlate = numberPlate;
 	}
@@ -73,7 +67,7 @@ public class Car {
 	public void setParts(Set<Part> parts) {
 		this.parts = parts;
 	}
-	
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -85,5 +79,5 @@ public class Car {
 	public void addPart(Part part) {
 		this.parts.add(part);
 	}
-	
+
 }

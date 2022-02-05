@@ -41,21 +41,16 @@ public class PartController {
 
 	@PostMapping("/parts")
 	public Part addPart(@RequestBody Part part) {
-		Part part1 = new Part();
-		part1.setPartName(part.getPartName());
-		part1.setPrice(part.getPrice());
-		part1.setCars(part.getCars());
-		
 		return partManager.save(part);
 	}
-	
+
 	@PutMapping("/parts/{id}")
 	public Part updatePart(@PathVariable Long id, @RequestBody Part part) {
 		Part part1 = partManager.findById(id)
 				.orElseThrow(() -> new ApiRequestException("Part not found with id: " + id));
 		part1.setPartName(part.getPartName());
 		part1.setPrice(part.getPrice());
-		
+
 		return partManager.save(part1);
 	}
 

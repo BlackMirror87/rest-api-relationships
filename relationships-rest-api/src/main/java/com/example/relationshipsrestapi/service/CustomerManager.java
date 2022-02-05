@@ -18,23 +18,23 @@ public class CustomerManager {
 	public CustomerManager(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
 	}
-	
+
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
-	
+
 	public Optional<Customer> findById(Long id) {
 		return customerRepository.findById(id);
 	}
-	
+
 	public Customer save(Customer customer) {
 		return customerRepository.save(customer);
 	}
-	
+
 	public void delete(Customer customer) {
 		customerRepository.delete(customer);
 	}
-	
+
 	public void deleteById(Long id) {
 		customerRepository.deleteById(id);
 	}

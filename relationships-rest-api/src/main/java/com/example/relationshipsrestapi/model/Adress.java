@@ -1,7 +1,6 @@
 package com.example.relationshipsrestapi.model;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -11,25 +10,23 @@ public class Adress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "phone", columnDefinition = "TEXT", nullable = false)
 	private String phone;
-	
+
 	@Column(name = "street", columnDefinition = "TEXT", nullable = false)
 	private String street;
-	
+
 	@Column(name = "city", columnDefinition = "TEXT", nullable = false)
 	private String city;
-	
+
 	@JsonIgnore
 	@OneToOne(mappedBy = "adress")
 	private Customer customer;
-	
-	
 
 	public Adress() {
 	}
-	
+
 	public Adress(Long id, String phone, String street, String city) {
 		this.id = id;
 		this.phone = phone;
